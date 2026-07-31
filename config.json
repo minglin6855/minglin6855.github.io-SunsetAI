@@ -1,8 +1,6 @@
 {
-  "site_title": "AI 火燒雲預測",
-  "location_name": "台北",
-  "latitude": 25.033,
-  "longitude": 121.5654,
+  "site_title": "TWILIGHT RADAR",
+  "site_subtitle": "火燒雲三模式預報",
   "timezone": "Asia/Taipei",
   "forecast_days": 3,
   "refresh_minutes": 60,
@@ -11,9 +9,144 @@
     0,
     1
   ],
+  "default_region": "south",
   "models": {
     "ECMWF": "ecmwf_ifs025",
     "GFS": "gfs_global",
     "ICON": "icon_global"
+  },
+  "regions": {
+    "north": {
+      "label": "北部",
+      "description": "東北角・北海岸・淡水",
+      "spots": [
+        {
+          "name": "東北角",
+          "detail": "三貂角／鼻頭角",
+          "latitude": 25.01,
+          "longitude": 122.0
+        },
+        {
+          "name": "北海岸",
+          "detail": "老梅／石門",
+          "latitude": 25.29,
+          "longitude": 121.54
+        },
+        {
+          "name": "淡水",
+          "detail": "漁人碼頭／沙崙",
+          "latitude": 25.18,
+          "longitude": 121.41
+        }
+      ]
+    },
+    "central": {
+      "label": "中部",
+      "description": "高美・日月潭・金龍山",
+      "spots": [
+        {
+          "name": "高美濕地",
+          "detail": "清水海線",
+          "latitude": 24.31,
+          "longitude": 120.55
+        },
+        {
+          "name": "日月潭",
+          "detail": "朝霧／出水口",
+          "latitude": 23.85,
+          "longitude": 120.91
+        },
+        {
+          "name": "魚池金龍山",
+          "detail": "日出與雲海視角",
+          "latitude": 23.9,
+          "longitude": 120.92
+        }
+      ]
+    },
+    "south": {
+      "label": "南部",
+      "description": "嘉義・台南・高雄・恆春",
+      "spots": [
+        {
+          "name": "嘉義東石",
+          "detail": "漁人碼頭",
+          "latitude": 23.45,
+          "longitude": 120.13
+        },
+        {
+          "name": "北門鹽田",
+          "detail": "井仔腳周邊",
+          "latitude": 23.27,
+          "longitude": 120.12
+        },
+        {
+          "name": "七股",
+          "detail": "國聖燈塔",
+          "latitude": 23.1,
+          "longitude": 120.04
+        },
+        {
+          "name": "安平",
+          "detail": "觀夕平台",
+          "latitude": 23.0,
+          "longitude": 120.15
+        },
+        {
+          "name": "左鎮二寮",
+          "detail": "低海拔雲海視角",
+          "latitude": 22.99,
+          "longitude": 120.41
+        },
+        {
+          "name": "西子灣",
+          "detail": "柴山海岸",
+          "latitude": 22.62,
+          "longitude": 120.26
+        },
+        {
+          "name": "恆春萬里桐",
+          "detail": "西海岸夕照",
+          "latitude": 22.0,
+          "longitude": 120.7
+        }
+      ]
+    },
+    "east": {
+      "label": "東部",
+      "description": "宜蘭・花蓮・台東",
+      "spots": [
+        {
+          "name": "三仙台",
+          "detail": "成功海岸",
+          "latitude": 23.12,
+          "longitude": 121.41
+        },
+        {
+          "name": "六十石山",
+          "detail": "富里山區",
+          "latitude": 23.22,
+          "longitude": 121.32
+        },
+        {
+          "name": "石梯坪",
+          "detail": "豐濱海岸",
+          "latitude": 23.49,
+          "longitude": 121.51
+        },
+        {
+          "name": "南方澳",
+          "detail": "蘇澳港灣",
+          "latitude": 24.58,
+          "longitude": 121.86
+        },
+        {
+          "name": "頭城",
+          "detail": "外澳／龜山島",
+          "latitude": 24.87,
+          "longitude": 121.84
+        }
+      ]
+    }
   }
 }

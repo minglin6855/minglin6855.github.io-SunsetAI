@@ -2,106 +2,265 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta http-equiv="refresh" content="3600">
-  <meta name="theme-color" content="#111827">
-  <title>AI 火燒雲預測｜台北</title>
+  <meta name="theme-color" content="#0a101b">
+  <title>TWILIGHT RADAR｜資料更新中</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main class="page-shell">
-    <header class="topbar">
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+
+  <main class="app">
+    <header class="app-header">
+      <div class="brand-mark" aria-hidden="true">☼</div>
       <div>
         <p class="eyebrow">SUNSET FORECAST</p>
-        <h1>AI 火燒雲預測</h1>
+        <h1>TWILIGHT RADAR</h1>
+        <p class="subtitle">火燒雲三模式預報</p>
       </div>
-      <div class="place">
-        <strong>台北</strong>
-        <span>資料更新失敗</span>
+      <div class="date-chip">
+        <span>預報日期</span>
+        <strong>資料更新中</strong>
       </div>
     </header>
 
-    <section class="hero card">
-      <div class="sun-glow" aria-hidden="true"></div>
-      <div class="hero-copy">
-        <p class="section-label">今晚火燒雲指數</p>
-        <div class="score-line">
-          <span class="score">--</span>
-          <span class="unit">/ 100</span>
-        </div>
-        <p class="status fair">暫無最新預報</p>
-        <p class="summary">無法取得最新模式資料。系統將於下次排程重試。錯誤：ConnectionError</p>
+    <section class="intro-card">
+      <div>
+        <p class="intro-label">選擇觀測區域</p>
+        <h2>今晚哪裡最有機會？</h2>
       </div>
-
-      <div class="confidence">
-        <div class="confidence-ring" style="--value: --;">
-          <div>
-            <strong>--</strong>
-            <span>信心指數</span>
-          </div>
-        </div>
-        <p><b>資料不足信心</b><br>ECMWF／GFS／ICON 分歧度</p>
-      </div>
+      <span class="no-js">HTML＋CSS</span>
     </section>
 
-    <section class="grid">
-      <article class="card">
-        <div class="card-title">
-          <div>
-            <p class="section-label">MODEL CONSENSUS</p>
-            <h2>三模式預測</h2>
-          </div>
-          <span class="tag">保守中位數</span>
-        </div>
-        <div class="model-list">
-          <p class='muted'>ECMWF／GFS／ICON 資料暫時無法取得。</p>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="card-title">
-          <div>
-            <p class="section-label">SUNSET WINDOW</p>
-            <h2>日落資訊</h2>
-          </div>
-        </div>
-        <div class="sunset-time">--:--</div>
-        <p class="muted">評估日落前一小時至日落後一小時</p>
-      </article>
+    <section class="region-selector">
+      <input class="region-radio" type="radio" name="region" id="region-north"><input class="region-radio" type="radio" name="region" id="region-central"><input class="region-radio" type="radio" name="region" id="region-south" checked><input class="region-radio" type="radio" name="region" id="region-east"><nav class="region-tabs" aria-label="選擇區域"><label for="region-north" class="region-tab region-tab-north"><strong>北部</strong><span>東北角・北海岸・淡水</span></label><label for="region-central" class="region-tab region-tab-central"><strong>中部</strong><span>高美・日月潭・金龍山</span></label><label for="region-south" class="region-tab region-tab-south"><strong>南部</strong><span>嘉義・台南・高雄・恆春</span></label><label for="region-east" class="region-tab region-tab-east"><strong>東部</strong><span>宜蘭・花蓮・台東</span></label></nav>
     </section>
 
-    <section class="card">
-      <div class="card-title">
-        <div>
-          <p class="section-label">WEATHER SIGNALS</p>
-          <h2>關鍵條件</h2>
-        </div>
+    <section class="region-panel panel-north" aria-labelledby="region-north"><div class="panel-heading"><span>北部</span><p>3 個攝影點</p></div><div class="spot-list">
+    <article class="spot-card unavailable">
+      <div class="spot-head">
+        <div><h3>東北角</h3><p>三貂角／鼻頭角</p></div>
+        <time>--:-- 日落</time>
       </div>
-
-      <div class="metrics">
-        <div class="metric">
-          <span>高雲</span><strong>--%</strong>
-          <div class="track"><i style="width:--%"></i></div>
-        </div>
-        <div class="metric">
-          <span>中雲</span><strong>--%</strong>
-          <div class="track"><i style="width:--%"></i></div>
-        </div>
-        <div class="metric">
-          <span>低雲</span><strong>--%</strong>
-          <div class="track"><i style="width:--%"></i></div>
-        </div>
-        <div class="metric compact"><span>降水</span><strong>-- mm</strong></div>
-        <div class="metric compact"><span>能見度</span><strong>-- km</strong></div>
-        <div class="metric compact"><span>濕度</span><strong>--%</strong></div>
-        <div class="metric compact"><span>風速</span><strong>-- km/h</strong></div>
+      <div class="score-block">
+        <div><span class="score-label">火燒雲指數</span><div class="score-value">--<small>/100</small></div></div>
+        <div class="confidence-badge"><strong>--</strong><span>資料更新中</span></div>
       </div>
-    </section>
+      <p class="muted">Open-Meteo 暫時無法取得，系統將於下次排程重試。</p>
+    </article>
+    
+    <article class="spot-card unavailable">
+      <div class="spot-head">
+        <div><h3>北海岸</h3><p>老梅／石門</p></div>
+        <time>--:-- 日落</time>
+      </div>
+      <div class="score-block">
+        <div><span class="score-label">火燒雲指數</span><div class="score-value">--<small>/100</small></div></div>
+        <div class="confidence-badge"><strong>--</strong><span>資料更新中</span></div>
+      </div>
+      <p class="muted">Open-Meteo 暫時無法取得，系統將於下次排程重試。</p>
+    </article>
+    
+    <article class="spot-card unavailable">
+      <div class="spot-head">
+        <div><h3>淡水</h3><p>漁人碼頭／沙崙</p></div>
+        <time>--:-- 日落</time>
+      </div>
+      <div class="score-block">
+        <div><span class="score-label">火燒雲指數</span><div class="score-value">--<small>/100</small></div></div>
+        <div class="confidence-badge"><strong>--</strong><span>資料更新中</span></div>
+      </div>
+      <p class="muted">Open-Meteo 暫時無法取得，系統將於下次排程重試。</p>
+    </article>
+    </div></section><section class="region-panel panel-central" aria-labelledby="region-central"><div class="panel-heading"><span>中部</span><p>3 個攝影點</p></div><div class="spot-list">
+    <article class="spot-card unavailable">
+      <div class="spot-head">
+        <div><h3>高美濕地</h3><p>清水海線</p></div>
+        <time>--:-- 日落</time>
+      </div>
+      <div class="score-block">
+        <div><span class="score-label">火燒雲指數</span><div class="score-value">--<small>/100</small></div></div>
+        <div class="confidence-badge"><strong>--</strong><span>資料更新中</span></div>
+      </div>
+      <p class="muted">Open-Meteo 暫時無法取得，系統將於下次排程重試。</p>
+    </article>
+    
+    <article class="spot-card unavailable">
+      <div class="spot-head">
+        <div><h3>日月潭</h3><p>朝霧／出水口</p></div>
+        <time>--:-- 日落</time>
+      </div>
+      <div class="score-block">
+        <div><span class="score-label">火燒雲指數</span><div class="score-value">--<small>/100</small></div></div>
+        <div class="confidence-badge"><strong>--</strong><span>資料更新中</span></div>
+      </div>
+      <p class="muted">Open-Meteo 暫時無法取得，系統將於下次排程重試。</p>
+    </article>
+    
+    <article class="spot-card unavailable">
+      <div class="spot-head">
+        <div><h3>魚池金龍山</h3><p>日出與雲海視角</p></div>
+        <time>--:-- 日落</time>
+      </div>
+      <div class="score-block">
+        <div><span class="score-label">火燒雲指數</span><div class="score-value">--<small>/100</small></div></div>
+        <div class="confidence-badge"><strong>--</strong><span>資料更新中</span></div>
+      </div>
+      <p class="muted">Open-Meteo 暫時無法取得，系統將於下次排程重試。</p>
+    </article>
+    </div></section><section class="region-panel panel-south" aria-labelledby="region-south"><div class="panel-heading"><span>南部</span><p>7 個攝影點</p></div><div class="spot-list">
+    <article class="spot-card unavailable">
+      <div class="spot-head">
+        <div><h3>嘉義東石</h3><p>漁人碼頭</p></div>
+        <time>--:-- 日落</time>
+      </div>
+      <div class="score-block">
+        <div><span class="score-label">火燒雲指數</span><div class="score-value">--<small>/100</small></div></div>
+        <div class="confidence-badge"><strong>--</strong><span>資料更新中</span></div>
+      </div>
+      <p class="muted">Open-Meteo 暫時無法取得，系統將於下次排程重試。</p>
+    </article>
+    
+    <article class="spot-card unavailable">
+      <div class="spot-head">
+        <div><h3>北門鹽田</h3><p>井仔腳周邊</p></div>
+        <time>--:-- 日落</time>
+      </div>
+      <div class="score-block">
+        <div><span class="score-label">火燒雲指數</span><div class="score-value">--<small>/100</small></div></div>
+        <div class="confidence-badge"><strong>--</strong><span>資料更新中</span></div>
+      </div>
+      <p class="muted">Open-Meteo 暫時無法取得，系統將於下次排程重試。</p>
+    </article>
+    
+    <article class="spot-card unavailable">
+      <div class="spot-head">
+        <div><h3>七股</h3><p>國聖燈塔</p></div>
+        <time>--:-- 日落</time>
+      </div>
+      <div class="score-block">
+        <div><span class="score-label">火燒雲指數</span><div class="score-value">--<small>/100</small></div></div>
+        <div class="confidence-badge"><strong>--</strong><span>資料更新中</span></div>
+      </div>
+      <p class="muted">Open-Meteo 暫時無法取得，系統將於下次排程重試。</p>
+    </article>
+    
+    <article class="spot-card unavailable">
+      <div class="spot-head">
+        <div><h3>安平</h3><p>觀夕平台</p></div>
+        <time>--:-- 日落</time>
+      </div>
+      <div class="score-block">
+        <div><span class="score-label">火燒雲指數</span><div class="score-value">--<small>/100</small></div></div>
+        <div class="confidence-badge"><strong>--</strong><span>資料更新中</span></div>
+      </div>
+      <p class="muted">Open-Meteo 暫時無法取得，系統將於下次排程重試。</p>
+    </article>
+    
+    <article class="spot-card unavailable">
+      <div class="spot-head">
+        <div><h3>左鎮二寮</h3><p>低海拔雲海視角</p></div>
+        <time>--:-- 日落</time>
+      </div>
+      <div class="score-block">
+        <div><span class="score-label">火燒雲指數</span><div class="score-value">--<small>/100</small></div></div>
+        <div class="confidence-badge"><strong>--</strong><span>資料更新中</span></div>
+      </div>
+      <p class="muted">Open-Meteo 暫時無法取得，系統將於下次排程重試。</p>
+    </article>
+    
+    <article class="spot-card unavailable">
+      <div class="spot-head">
+        <div><h3>西子灣</h3><p>柴山海岸</p></div>
+        <time>--:-- 日落</time>
+      </div>
+      <div class="score-block">
+        <div><span class="score-label">火燒雲指數</span><div class="score-value">--<small>/100</small></div></div>
+        <div class="confidence-badge"><strong>--</strong><span>資料更新中</span></div>
+      </div>
+      <p class="muted">Open-Meteo 暫時無法取得，系統將於下次排程重試。</p>
+    </article>
+    
+    <article class="spot-card unavailable">
+      <div class="spot-head">
+        <div><h3>恆春萬里桐</h3><p>西海岸夕照</p></div>
+        <time>--:-- 日落</time>
+      </div>
+      <div class="score-block">
+        <div><span class="score-label">火燒雲指數</span><div class="score-value">--<small>/100</small></div></div>
+        <div class="confidence-badge"><strong>--</strong><span>資料更新中</span></div>
+      </div>
+      <p class="muted">Open-Meteo 暫時無法取得，系統將於下次排程重試。</p>
+    </article>
+    </div></section><section class="region-panel panel-east" aria-labelledby="region-east"><div class="panel-heading"><span>東部</span><p>5 個攝影點</p></div><div class="spot-list">
+    <article class="spot-card unavailable">
+      <div class="spot-head">
+        <div><h3>三仙台</h3><p>成功海岸</p></div>
+        <time>--:-- 日落</time>
+      </div>
+      <div class="score-block">
+        <div><span class="score-label">火燒雲指數</span><div class="score-value">--<small>/100</small></div></div>
+        <div class="confidence-badge"><strong>--</strong><span>資料更新中</span></div>
+      </div>
+      <p class="muted">Open-Meteo 暫時無法取得，系統將於下次排程重試。</p>
+    </article>
+    
+    <article class="spot-card unavailable">
+      <div class="spot-head">
+        <div><h3>六十石山</h3><p>富里山區</p></div>
+        <time>--:-- 日落</time>
+      </div>
+      <div class="score-block">
+        <div><span class="score-label">火燒雲指數</span><div class="score-value">--<small>/100</small></div></div>
+        <div class="confidence-badge"><strong>--</strong><span>資料更新中</span></div>
+      </div>
+      <p class="muted">Open-Meteo 暫時無法取得，系統將於下次排程重試。</p>
+    </article>
+    
+    <article class="spot-card unavailable">
+      <div class="spot-head">
+        <div><h3>石梯坪</h3><p>豐濱海岸</p></div>
+        <time>--:-- 日落</time>
+      </div>
+      <div class="score-block">
+        <div><span class="score-label">火燒雲指數</span><div class="score-value">--<small>/100</small></div></div>
+        <div class="confidence-badge"><strong>--</strong><span>資料更新中</span></div>
+      </div>
+      <p class="muted">Open-Meteo 暫時無法取得，系統將於下次排程重試。</p>
+    </article>
+    
+    <article class="spot-card unavailable">
+      <div class="spot-head">
+        <div><h3>南方澳</h3><p>蘇澳港灣</p></div>
+        <time>--:-- 日落</time>
+      </div>
+      <div class="score-block">
+        <div><span class="score-label">火燒雲指數</span><div class="score-value">--<small>/100</small></div></div>
+        <div class="confidence-badge"><strong>--</strong><span>資料更新中</span></div>
+      </div>
+      <p class="muted">Open-Meteo 暫時無法取得，系統將於下次排程重試。</p>
+    </article>
+    
+    <article class="spot-card unavailable">
+      <div class="spot-head">
+        <div><h3>頭城</h3><p>外澳／龜山島</p></div>
+        <time>--:-- 日落</time>
+      </div>
+      <div class="score-block">
+        <div><span class="score-label">火燒雲指數</span><div class="score-value">--<small>/100</small></div></div>
+        <div class="confidence-badge"><strong>--</strong><span>資料更新中</span></div>
+      </div>
+      <p class="muted">Open-Meteo 暫時無法取得，系統將於下次排程重試。</p>
+    </article>
+    </div></section>
 
     <footer>
-      <p>資料來源：Open-Meteo｜ECMWF IFS 0.25°、GFS Global、DWD ICON Global</p>
-      <p>更新時間：2026-08-01 00:40（Asia/Taipei）</p>
-      <p class="disclaimer">本頁為攝影輔助預測；實際雲況仍可能因局地天氣快速變化而不同。</p>
+      <p>資料來源：Open-Meteo</p>
+      <p>ECMWF IFS 0.25°／GFS Global／DWD ICON Global</p>
+      <p>更新：2026-08-01 00:48（Asia/Taipei）</p>
+      <p class="fine-print">信心指數代表三模式一致程度，不等於實際發生機率。前端未使用 JavaScript。</p>
     </footer>
   </main>
 </body>
