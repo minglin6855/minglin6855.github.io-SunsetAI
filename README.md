@@ -37,3 +37,11 @@
 
 區域切換使用 CSS `:has()`。現代 Chrome、Edge、Safari 與 Firefox 均支援。
 舊瀏覽器若不支援，會自動顯示全部區域，資料仍可正常閱讀。
+
+
+## v1.1 相容性修正
+
+- 移除 `visibility`，避免部分模式不提供該欄位時整個多模式請求失敗。
+- Open-Meteo HTTP 錯誤內容會直接顯示在 GitHub Actions log。
+- 加強 ECMWF、GFS、ICON 回傳欄位名稱容錯。
+- 火燒雲評分重新分配降水、濕度與風速權重。

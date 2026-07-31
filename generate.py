@@ -23,7 +23,6 @@ HOURLY_VARS = [
     "cloud_cover_mid",
     "cloud_cover_high",
     "precipitation",
-    "visibility",
     "relative_humidity_2m",
     "wind_speed_10m",
 ]
@@ -37,7 +36,6 @@ class ModelResult:
     mid: float
     high: float
     precipitation: float
-    visibility: float
     humidity: float
     wind: float
 
@@ -56,17 +54,16 @@ def triangular(value: float, ideal: float, width: float) -> float:
 
 
 def sunset_score(low: float, mid: float, high: float, precipitation: float,
-                 visibility: float, humidity: float, wind: float) -> float:
+                 humidity: float, wind: float) -> float:
     high_score = triangular(high, 65, 65)
     mid_score = triangular(mid, 45, 60)
     low_clear = clamp(100 - low * 1.15)
     rain = clamp(100 - precipitation * 55)
-    vis = clamp(visibility / 30000 * 100)
     humid = triangular(humidity, 68, 45)
     wind_score = triangular(wind, 12, 30)
     return clamp(
         high_score * .28 + mid_score * .18 + low_clear * .25 +
-        rain * .12 + vis * .07 + humid * .06 + wind_score * .04
+        rain * .16 + humid * .08 + wind_score * .05
     )
 
 
@@ -81,20 +78,34 @@ def fetch_spot(spot: dict[str, Any], config: dict[str, Any]) -> dict[str, Any]:
         "models": ",".join(config["models"].values()),
     }
     response = requests.get(API_URL, params=params, timeout=45)
-    response.raise_for_status()
-    return response.json()
+    if not response.ok:
+        raise RuntimeError(f"Open-Meteo HTTP {response.status_code}: {response.text[:500]}")
+    payload = response.json()
+    if payload.get("error"):
+        raise RuntimeError(f"Open-Meteo API error: {payload.get('reason', payload)}")
+    return payload
 
 
 def series(hourly: dict[str, Any], variable: str, model_id: str) -> list[Any]:
+    aliases = {
+        "ecmwf_ifs025": ("ecmwf", "ifs025", "ifs_025", "ifs"),
+        "gfs_global": ("gfs_global", "gfs"),
+        "icon_global": ("icon_global", "icon"),
+    }
     candidates = [f"{variable}_{model_id}", variable]
+    tokens = aliases.get(model_id, (model_id,))
     candidates += [
         key for key in hourly
-        if key.startswith(variable + "_") and model_id.lower() in key.lower()
+        if key.startswith(variable + "_")
+        and any(token.lower() in key.lower() for token in tokens)
     ]
-    for key in candidates:
+    for key in dict.fromkeys(candidates):
         if key in hourly:
             return hourly[key]
-    raise KeyError(f"Missing {variable} for {model_id}")
+    matching = [key for key in hourly if key.startswith(variable + "_")]
+    raise KeyError(
+        f"Missing {variable} for {model_id}; available model fields: {matching}"
+    )
 
 
 def choose_sunset(data: dict[str, Any], tz: ZoneInfo) -> tuple[str, datetime]:
@@ -131,11 +142,11 @@ def calculate_models(data: dict[str, Any], config: dict[str, Any], sunset: datet
             display,
             sunset_score(
                 vals["cloud_cover_low"], vals["cloud_cover_mid"], vals["cloud_cover_high"],
-                vals["precipitation"], vals["visibility"],
+                vals["precipitation"],
                 vals["relative_humidity_2m"], vals["wind_speed_10m"]
             ),
             vals["cloud_cover_low"], vals["cloud_cover_mid"], vals["cloud_cover_high"],
-            vals["precipitation"], vals["visibility"],
+            vals["precipitation"],
             vals["relative_humidity_2m"], vals["wind_speed_10m"],
         ))
     return results
@@ -212,7 +223,6 @@ def spot_card(spot: dict[str, Any], config: dict[str, Any]) -> tuple[str, str]:
         <summary>查看氣象細節</summary>
         <dl>
           <div><dt>降水</dt><dd>{med.precipitation:.1f} mm</dd></div>
-          <div><dt>能見度</dt><dd>{med.visibility / 1000:.1f} km</dd></div>
           <div><dt>濕度</dt><dd>{round(med.humidity)}%</dd></div>
           <div><dt>風速</dt><dd>{med.wind:.1f} km/h</dd></div>
         </dl>
