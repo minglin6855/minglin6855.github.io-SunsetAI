@@ -108,9 +108,41 @@ def series(hourly: dict[str, Any], variable: str, model_id: str) -> list[Any]:
     )
 
 
+def daily_series(daily: dict[str, Any], variable: str) -> list[Any]:
+    """Read a daily variable from single- or multi-model Open-Meteo responses."""
+    if variable in daily:
+        return daily[variable]
+
+    # Multi-model responses may suffix daily fields with the model identifier.
+    matching = [
+        key for key in daily
+        if key.startswith(variable + "_") and isinstance(daily[key], list)
+    ]
+    if matching:
+        # Sunrise/sunset differences between global models are negligible here.
+        # Prefer ECMWF when available, otherwise use the first returned model.
+        preferred = next(
+            (key for key in matching if "ecmwf" in key.lower()),
+            matching[0],
+        )
+        return daily[preferred]
+
+    raise KeyError(
+        f"Missing daily {variable}; available daily fields: {list(daily.keys())}"
+    )
+
+
 def choose_sunset(data: dict[str, Any], tz: ZoneInfo) -> tuple[str, datetime]:
     now = datetime.now(tz)
-    sunsets = [datetime.fromisoformat(x).replace(tzinfo=tz) for x in data["daily"]["sunset"]]
+    sunset_values = daily_series(data["daily"], "sunset")
+    sunsets = [
+        datetime.fromisoformat(x).replace(tzinfo=tz)
+        for x in sunset_values
+        if x
+    ]
+    if not sunsets:
+        raise ValueError("Open-Meteo returned no usable sunset values")
+
     for sunset in sunsets:
         if sunset >= now - timedelta(hours=1):
             return sunset.date().isoformat(), sunset
@@ -277,7 +309,7 @@ def build_regions(config: dict[str, Any]) -> tuple[str, str, str]:
                 target_date = target_date or date
                 cards.append(card)
             except Exception as exc:
-                print(f"WARNING {spot['name']}: {exc}")
+                print(f"WARNING {spot['name']}: {type(exc).__name__}: {exc}")
                 cards.append(fallback_card(spot))
         panels.append(
             f'<section class="region-panel panel-{key}" aria-labelledby="region-{key}">'

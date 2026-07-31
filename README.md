@@ -45,3 +45,11 @@
 - Open-Meteo HTTP 錯誤內容會直接顯示在 GitHub Actions log。
 - 加強 ECMWF、GFS、ICON 回傳欄位名稱容錯。
 - 火燒雲評分重新分配降水、濕度與風速權重。
+
+
+## v1.2 修正
+
+- 修正 Open-Meteo 多模式回傳時 `daily.sunset` 可能帶模型後綴的問題。
+- 可辨識 `sunset`、`sunset_ecmwf_ifs025`、`sunset_gfs_global`、`sunset_icon_global` 等欄位。
+- 優先採用 ECMWF 的日落時間；未提供時自動使用其他模式。
+- GitHub Actions log 現在會顯示完整例外類型與可用欄位。
