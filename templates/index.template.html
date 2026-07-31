@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="refresh" content="{{REFRESH_SECONDS}}">
+  <meta name="theme-color" content="#111827">
+  <title>{{SITE_TITLE}}｜{{LOCATION}}</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="page-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">SUNSET FORECAST</p>
+        <h1>{{SITE_TITLE}}</h1>
+      </div>
+      <div class="place">
+        <strong>{{LOCATION}}</strong>
+        <span>{{TARGET_DATE}}</span>
+      </div>
+    </header>
+
+    <section class="hero card">
+      <div class="sun-glow" aria-hidden="true"></div>
+      <div class="hero-copy">
+        <p class="section-label">今晚火燒雲指數</p>
+        <div class="score-line">
+          <span class="score">{{MAIN_SCORE}}</span>
+          <span class="unit">/ 100</span>
+        </div>
+        <p class="status {{STATUS_CLASS}}">{{STATUS_TEXT}}</p>
+        <p class="summary">{{EXPLANATION}}</p>
+      </div>
+
+      <div class="confidence">
+        <div class="confidence-ring" style="--value: {{CONFIDENCE}};">
+          <div>
+            <strong>{{CONFIDENCE}}</strong>
+            <span>信心指數</span>
+          </div>
+        </div>
+        <p><b>{{CONFIDENCE_LABEL}}信心</b><br>ECMWF／GFS／ICON 分歧度</p>
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <div class="card-title">
+          <div>
+            <p class="section-label">MODEL CONSENSUS</p>
+            <h2>三模式預測</h2>
+          </div>
+          <span class="tag">保守中位數</span>
+        </div>
+        <div class="model-list">
+          {{MODEL_ROWS}}
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-title">
+          <div>
+            <p class="section-label">SUNSET WINDOW</p>
+            <h2>日落資訊</h2>
+          </div>
+        </div>
+        <div class="sunset-time">{{SUNSET_TIME}}</div>
+        <p class="muted">評估日落前一小時至日落後一小時</p>
+      </article>
+    </section>
+
+    <section class="card">
+      <div class="card-title">
+        <div>
+          <p class="section-label">WEATHER SIGNALS</p>
+          <h2>關鍵條件</h2>
+        </div>
+      </div>
+
+      <div class="metrics">
+        <div class="metric">
+          <span>高雲</span><strong>{{HIGH_CLOUD}}%</strong>
+          <div class="track"><i style="width:{{HIGH_CLOUD}}%"></i></div>
+        </div>
+        <div class="metric">
+          <span>中雲</span><strong>{{MID_CLOUD}}%</strong>
+          <div class="track"><i style="width:{{MID_CLOUD}}%"></i></div>
+        </div>
+        <div class="metric">
+          <span>低雲</span><strong>{{LOW_CLOUD}}%</strong>
+          <div class="track"><i style="width:{{LOW_CLOUD}}%"></i></div>
+        </div>
+        <div class="metric compact"><span>降水</span><strong>{{PRECIPITATION}} mm</strong></div>
+        <div class="metric compact"><span>能見度</span><strong>{{VISIBILITY}} km</strong></div>
+        <div class="metric compact"><span>濕度</span><strong>{{HUMIDITY}}%</strong></div>
+        <div class="metric compact"><span>風速</span><strong>{{WIND}} km/h</strong></div>
+      </div>
+    </section>
+
+    <footer>
+      <p>資料來源：Open-Meteo｜ECMWF IFS 0.25°、GFS Global、DWD ICON Global</p>
+      <p>更新時間：{{UPDATED_TIME}}（Asia/Taipei）</p>
+      <p class="disclaimer">本頁為攝影輔助預測；實際雲況仍可能因局地天氣快速變化而不同。</p>
+    </footer>
+  </main>
+</body>
+</html>

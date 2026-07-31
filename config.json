@@ -1,0 +1,19 @@
+{
+  "site_title": "AI 火燒雲預測",
+  "location_name": "台北",
+  "latitude": 25.033,
+  "longitude": 121.5654,
+  "timezone": "Asia/Taipei",
+  "forecast_days": 3,
+  "refresh_minutes": 60,
+  "sunset_window_hours": [
+    -1,
+    0,
+    1
+  ],
+  "models": {
+    "ECMWF": "ecmwf_ifs025",
+    "GFS": "gfs_global",
+    "ICON": "icon_global"
+  }
+}
